@@ -3,7 +3,6 @@ name: CI - Build and Type Check
 on:
   # Triggers the workflow on push or pull request events (excluding only main)
   push:
-  pull_request:
 
 jobs:
   build:
