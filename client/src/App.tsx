@@ -1,5 +1,6 @@
+import "./App.css";
 import { useEffect, useState } from 'react'
-import List from './components/List'
+import BooksList from './components/BooksList'
 import type { Book } from './types'
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
     getBooks()
   }, [])
 
-  return <>{books.length === 0 ? <p>Finding books...</p> : <List books={books} />}</>
+  return <>{books.length === 0 ? <p>Finding books...</p> : <BooksList books={books} />}</>
 }
 
 export default App
