@@ -1,0 +1,35 @@
+name: CI - Build and Type Check
+
+on:
+  # Triggers the workflow on push or pull request events (excluding only main)
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      # Assuming your project uses Node.js version 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' 
+        cache: 'npm' # Use npm cache for faster dependency installation
+
+    - name: Install Dependencies
+      # Install project dependencies
+      run: npm install
+
+    - name: Run TypeScript Compile Check
+      # The core step: running tsc (TypeScript Compiler)
+      # The '--noEmit' flag ensures tsc only checks for errors and does not
+      # output JavaScript files, which is ideal for a fast CI check.
+      run: npx tsc --noEmit
+
+    # Optional: If you had linting or unit tests, you would add steps here.
+    # - name: Run Unit Tests
+    #   run: npm test
