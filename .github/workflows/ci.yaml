@@ -1,7 +1,6 @@
 name: Build
 
 on:
-  # Triggers the workflow on push or pull request events (excluding only main)
   push:
 
 jobs:
@@ -13,21 +12,26 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Node.js
-      # Assuming your project uses Node.js version 20
       uses: actions/setup-node@v4
       with:
-        node-version: '20' 
+        node-version: '25.0.0' 
         cache: 'npm' # Use npm cache for faster dependency installation
 
-    - name: Install Dependencies
-      # Install project dependencies
+    - name: Install Client Dependencies
       run: npm install
+      working-directory: client
 
-    - name: Run TypeScript Compile Check
-      # The core step: running tsc (TypeScript Compiler)
-      # The '--noEmit' flag ensures tsc only checks for errors and does not
-      # output JavaScript files, which is ideal for a fast CI check.
-      run: npx tsc --noEmit
+    - name: Run Client TypeScript Compile Check
+      run: npm run build-dev
+      working-directory: client
+
+    - name: Install Server Dependencies
+      run: npm install
+      working-directory: server
+
+    - name: Run Server TypeScript Compile Check
+      run: npm run build
+      working-directory: server
 
     # Optional: If you had linting or unit tests, you would add steps here.
     # - name: Run Unit Tests
