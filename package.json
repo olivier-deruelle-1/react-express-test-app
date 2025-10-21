@@ -1,0 +1,20 @@
+{
+  "name": "react-express-test-app",
+  "version": "1.0.0",
+  "description": "Test project of a front-end React app connected to a Express backend server (monorepo)",
+  "scripts": {
+    "server": "npm run dev -w server",
+    "client": "npm run dev -w client",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "test:server": "npm test -w server",
+    "test:client": "npm test -w client"
+  },
+  "author": "olivier-deruelle-1",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
